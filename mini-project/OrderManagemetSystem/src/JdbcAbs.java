@@ -8,6 +8,6 @@ public interface JdbcAbs  {
      int exsistingUser();
      void productViewTable(ResultSet resultSet);
 
-    void Order(ResultSet resultSet, Connection connection, String name);
-    void orderHistory(ResultSet resultSet, String name);
+     void Order(ResultSet resultSet, Connection connection, String name);
+     void orderHistory(ResultSet resultSet, String name);
 }

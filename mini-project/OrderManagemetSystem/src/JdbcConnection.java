@@ -10,8 +10,9 @@ public class JdbcConnection {
     private static int flag=0;
 
     public static JdbcConnection jdbcConnection() {
+        Requried requried=new Requried();
 
-        int option = Requried.newUserOrExsitingUser();
+        int option = requried.newUserOrExsitingUser();
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

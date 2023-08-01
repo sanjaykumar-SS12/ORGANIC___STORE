@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class UserCreatingMethods {
 
+
     public static void newUserCreatingError(){
         System.out.println("1.Signin Again");
         System.out.println("2.Menu Again");
@@ -14,7 +15,11 @@ public class UserCreatingMethods {
         if(option == 1)  {
             JdbcConnection.jdbcConnection();
         }
-        else if(option == 2) Requried.newUserOrExsitingUser();
+        else if(option == 2) {
+            Requried requried=new Requried();
+
+            requried.newUserOrExsitingUser();
+        }
     }
 
 

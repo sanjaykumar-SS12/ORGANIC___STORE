@@ -1,12 +1,12 @@
 import java.sql.*;
 
 public class JdbcMethods{
-    public static String[] details = Requried.newUser();
 
     public static String name;
 
     public static void register(Connection connection, Statement statement, ResultSet resultSet, int count, int flag) throws SQLException {
-
+        Requried requried=new Requried();
+        String[] details = requried.newUser();
 
         while (resultSet.next()) {
             count++;
@@ -35,17 +35,21 @@ public class JdbcMethods{
 
                 if (rowsInserted > 0) {
                     System.out.println("You're signed In!");
-                   int option=Requried.exsistingUser();
+
+                    SayHello h=new SayHello(name);
+                    h.displayMethod();
+                   int option=requried.exsistingUser();
 
                     if(option ==1){
+
                         resultSet=statement.executeQuery("select * from products");
-                        Requried.productViewTable(resultSet);
+                        requried.productViewTable(resultSet);
                     }
 
                     else if(option ==3)
                     {
                         resultSet = statement.executeQuery("select * from products");
-                        Requried.Order(resultSet,connection,name);
+                        requried.Order(resultSet,connection,name);
                     }
 
 
@@ -64,6 +68,8 @@ public class JdbcMethods{
     }
 
     public static void exsistingUser(Connection connection, Statement statement, ResultSet resultSet) throws SQLException {
+        Requried requried=new Requried();
+        String[] details = requried.newUser();
         int flag = 0;
         while (resultSet.next()) {
             if (resultSet.getString("Name").equals(details[0]) && resultSet.getString("password").equals(details[1])) {
@@ -71,22 +77,22 @@ public class JdbcMethods{
                 name=resultSet.getString("Name");
                 System.out.println("Signed Up!");
 
-                int option=Requried.exsistingUser();
+                int option=requried.exsistingUser();
 
                 if(option ==1){
                     resultSet=statement.executeQuery("select * from products");
-                    Requried.productViewTable(resultSet);
+                    requried.productViewTable(resultSet);
                 }
 
                 else if(option ==2){
                     resultSet=statement.executeQuery("select * from orders");
-                    Requried.orderHistory(resultSet,name);
+                    requried.orderHistory(resultSet,name);
                 }
                 else if(option ==3)
                 {
                     resultSet = statement.executeQuery("select * from products");
 
-                    Requried.Order(resultSet,connection,name);
+                    requried.Order(resultSet,connection,name);
 
 
                 }
